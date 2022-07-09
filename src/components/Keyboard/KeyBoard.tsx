@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { desPos, setBoard } from "../../redux/boardSlice";
+import { desPos, incRow, setBoard } from "../../redux/boardSlice";
 import { rootState } from "../interface";
 import Key from "../Key/Key";
 import "./KeyBoard.css";
@@ -22,12 +22,17 @@ const KeyBoard: React.FC = () => {
     dispatch(desPos());
     dispatch(setBoard(newBoard));
   };
+  const clickEnter = () =>{
+    if (position % 5 ===0 && position !== 0) {
+      dispatch(incRow())
+    }
+  }
   return (
     <div className="keyboard-container">
       {rows.map((row, idx) => {
         return (
           <div className="row">
-            {idx === 2 && <span className="letter-row">Enter</span>}
+            {idx === 2 && <span className="letter-row" onClick = {clickEnter}>Enter</span>}
             {row.split(" ").map((letter, idx) => {
               return (
                 <div className="letter-row">
