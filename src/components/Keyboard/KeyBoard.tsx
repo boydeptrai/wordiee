@@ -8,6 +8,7 @@ import "./KeyBoard.css";
 const KeyBoard: React.FC = () => {
   const position = useSelector((state: rootState) => state.board.pos);
   const board = useSelector((state: rootState) => state.board.board);
+  const row = useSelector((state:rootState) => state.board.row)
   const dispatch = useDispatch();
   const rows: string[] = [
     "q w e r t y u i o p",
@@ -16,7 +17,7 @@ const KeyBoard: React.FC = () => {
   ];
 
   const clickBack = () => {
-    if (position <= 0) return;
+    if (Math.floor((position -1 )/5) < row ) return;
     const newBoard = [...board];
     newBoard[position - 1] = "";
     dispatch(desPos());
