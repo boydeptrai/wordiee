@@ -8,7 +8,7 @@ import "./KeyBoard.css";
 const KeyBoard: React.FC = () => {
   const position = useSelector((state: rootState) => state.board.pos);
   const board = useSelector((state: rootState) => state.board.board);
-  const row = useSelector((state:rootState) => state.board.row)
+  const row = useSelector((state: rootState) => state.board.row);
   const dispatch = useDispatch();
   const rows: string[] = [
     "q w e r t y u i o p",
@@ -17,28 +17,32 @@ const KeyBoard: React.FC = () => {
   ];
 
   const clickBack = () => {
-    if (Math.floor((position -1 )/5) < row ) return;
+    if (Math.floor((position - 1) / 5) < row) return;
     const newBoard = [...board];
     newBoard[position - 1] = "";
     dispatch(desPos());
     dispatch(setBoard(newBoard));
   };
-  const clickEnter = () =>{
-    if (position % 5 ===0 && position !== 0) {
-      dispatch(incRow())
+  const clickEnter = () => {
+    if (position % 5 === 0 && position !== 0) {
+      dispatch(incRow());
     }
-  }
+  };
   return (
     <div className="keyboard-container">
       {rows.map((row, idx) => {
         return (
-          <div className="row">
-            {idx === 2 && <span className="letter-row" onClick = {clickEnter}>Enter</span>}
+          <div className="row" key={idx}>
+            {idx === 2 && (
+              <span className="letter-row" onClick={clickEnter}>
+                Enter
+              </span>
+            )}
             {row.split(" ").map((letter, idx) => {
               return (
-                <div className="letter-row">
+                <div className="letter-row" key={idx} >
                   <Key letter={letter.toUpperCase()} />
-                  {letter === "m" && <span onClick={clickBack}>Back</span>}
+                  {letter === "m" && <span onClick={clickBack}> Back </span>}
                 </div>
               );
             })}

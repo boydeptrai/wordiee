@@ -16,9 +16,9 @@ const Square: React.FC<IProps> = (props) => {
   const position = useSelector((state: rootState) => state.board.pos);
   const reduxRow = useSelector((state: rootState) => state.board.row);
 
-  const [correct, setCorrect] = useState(false);
-  const [almost, setAlmost] = useState(false);
-  const [wrong, setWrong] = useState(false);
+  const [correct, setCorrect] = useState<boolean>(false);
+  const [almost, setAlmost] = useState<boolean>(false);
+  const [wrong, setWrong] = useState<boolean>(false);
 
   let wordLastIndex = 4;
   let currentPos =
@@ -53,12 +53,15 @@ const Square: React.FC<IProps> = (props) => {
       setCorrect(false);
       setAlmost(false);
       setWrong(false);
-    }
+    };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[val]);
-  return (
+
+  const status: any = Math.floor(squareIndex/5) < reduxRow && (correct ? "correct" : almost ? "almost" : wrong ? "wrong" : "")
+    return (
     <motion.div animate={val ? "filled" : "unfilled"} variants={variants}>
-      <div className="square">{val}</div>
+      <div className="square" id={status}>{val}</div>
     </motion.div>
   );
 };
