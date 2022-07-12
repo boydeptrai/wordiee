@@ -35,7 +35,8 @@ const initialState = {
   ],
   pos: 0,
   row: 0,
-  key: ""
+  key: "",
+  correctWord: "CONES"
 };
 export const boardSlice = createSlice({
   name: "board",
