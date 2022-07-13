@@ -58,7 +58,7 @@ const Square: React.FC<IProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[val]);
 
-  const status: any = Math.floor(squareIndex/5) < reduxRow && (correct ? "correct" : almost ? "almost" : wrong ? "wrong" : "")
+  const status: any = Math.floor(squareIndex/5) < reduxRow ? (correct ? "correct" : almost ? "almost" : wrong ? "wrong" :"") : ""
     return (
     <motion.div animate={val ? "filled" : "unfilled"} variants={variants}>
       <div className="square" id={status}>{val}</div>
